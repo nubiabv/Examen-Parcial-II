@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="major.component.css">
+    <title>Major</title>
+</head>
+
+<body>
+    <h2>Major Management</h2>
+    <p>Add, update, delete and manage Major in the system.</p>
+
+    <h3>Add Major</h3>
+    <form [formGroup]="form" (ngSubmit)="addMajor()" class="max-w-lg mx-auto p-6 bg-white shadow-md rounded-lg">
+        <div class="mb-4">
+            <label for="id" class="block text-gray-700 font-bold">Id</label>
+            <input id="id" type="text" formControlName="id" class="w-full p-2 border rounded-lg" />
+        </div>
+
+        <div class="mb-4">
+            <label for="name" class="block text-gray-700 font-bold">Name</label>
+            <input id="name" type="text" formControlName="name" class="w-full p-2 border rounded-lg" />
+        </div>
+
+        <div class="mb-4">
+            <label for="code" class="block text-gray-700 font-bold">Code</label>
+            <input id="code" type="text" formControlName="code" class="w-full p-2 border rounded-lg" />
+        </div>
+
+        <button type="submit" [disabled]="form.invalid"
+            class="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-700">
+            Submit
+        </button>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Code</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let major of majors">
+                <td>{{ major.id }}</td>
+                <td>{{ major.name }}</td>
+                <td>{{ major.code }}</td>
+
+                <td>
+                    <button class="update" (click)="updateMajor(major)">Update</button>
+                    <button class="delete" (click)="deleteMajor(major.id)">Delete</button>
+                </td>
+            </tr>
+            <tr *ngIf="majors.length === 0">
+                <td colspan="10">No Major Found</td>
+            </tr>
+        </tbody>
+    </table>
+    
+</body>
+
+</html>
